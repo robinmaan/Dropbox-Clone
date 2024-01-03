@@ -5,7 +5,8 @@ import FileType from "@/typing"
 import { ColumnDef } from "@tanstack/react-table"
 
 import prettyBytes from "pretty-bytes"
-import {FileIcon, defaultStyles} from "react-file-icon"
+import {FileIcon} from "react-file-icon"
+import { defaultStyles } from "react-file-icon"
 import { COLOR_EXTENTION_MAP } from "@/contant"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -17,16 +18,19 @@ export const columns: ColumnDef<FileType>[] = [
     header:"type",
     cell:({renderValue, ...props}) => {
       const type = renderValue() as string;
-      const extension:string = type.split("/")[1];
+      const extension: string = type.split("/")[1];
+    
       return(
-        <div>
+        <div className="w-10">
           <FileIcon          
           extension={extension}
           labelColor={COLOR_EXTENTION_MAP[extension]}
+          //dfdssd
           
            />
+           
         </div>
-      )
+      );
     },
   },
   {
@@ -45,18 +49,20 @@ export const columns: ColumnDef<FileType>[] = [
     }
   },
   {
-    accessorKey:"downloadURl",
-    header:"Link",
-    cell:({renderValue, ...props})=>{
-      <a 
-      href={renderValue() as string}
-      target="_blank"
-      className="underlinetect-blue-500 hover:text-blue-600"
+  accessorKey: "downloadURL",
+  header: "Link",
+  cell: ({ renderValue, ...props }) => {
+    return (
+      <a
+        href={renderValue() as string}
+        target="_blank"
+        className="underline text-blue-500 hover:text-blue-600"
       >
         Download
       </a>
-    }
-  }
-  
+    );
+  },
+}
 ]
+
 
